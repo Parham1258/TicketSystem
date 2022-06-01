@@ -1,4 +1,4 @@
-# TicketSystem
+# Ticket System
 A Ticket System Discord Bot Source Setup!
 Made By Myself (Parham)
 ## How To Use?
