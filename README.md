@@ -7,6 +7,7 @@ You Can Just Watch Tutorial Or
 * Go To https://repl.it (Not Sponsered)
 * Make A Account (If You Don't Have)
 * Create A Repl With Import From GitHub Option
+* Select `Node.js` For Programming Language & For Run Code `run = "npm start"`
 * Run The Bot (If You Got Any Error Like: `* Module Not Found` Just Go To `Shell` & Type `npm i *` & Send)
 * Go To `README.txt` Generated File & Read Them
 * Go To `config.json` Generated File & Config Bot
