@@ -106,7 +106,7 @@ fire:null,
 
 
 s4d.client.on('ready', async () => {
-  if (!(typeof (server_id.roles.cache.get(support_role_id)) !== undefined)) {
+  if (!(typeof ((s4d.client.guilds.cache.get(server_id)).roles.cache.get(support_role_id)) !== undefined)) {
     console.log(('I Shutdown Bot Because Role ID Is Wrong' + '\n' +
     'You Can Fix The ID In The "config.json" File' + '\n' +
     'Made By Parham™️'));
