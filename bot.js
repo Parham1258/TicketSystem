@@ -58,7 +58,7 @@ fire:null,
                         console.log(s4d.client.user.tag + " is alive!")
                     })
                     logs(s4d.client);         
-                    var token, server_id, category_id, support_role_id, ticket_channels_count, created_ticket_channel;
+                    var token, server_id, support_role_id, ticket_channels_count, created_ticket_channel;
 
 
 
@@ -88,19 +88,18 @@ fire:null,
     'Now You Can Config Me In "config.json" File' + '\n' +
     'Made By Parham™️'));
     return
-  } else if (dootabase.get(String('token')) == 'Config Me!' || dootabase.get(String('server-id')) == 'Config Me!' || dootabase.get(String('category-id')) == 'Config Me!' || dootabase.get(String('support-role-id')) == 'Config Me!') {
+  } else if (dootabase.get(String('token')) == 'Config Me!' || dootabase.get(String('server-id')) == 'Config Me!' || dootabase.get(String('support-role-id')) == 'Config Me!') {
     console.log(('I Shutdown Bot Because You Didn\'t Fully Config Me' + '\n' +
     'You Can Config Me In The "config.json" File' + '\n' +
     'Made By Parham™️'));
     return
-  } else if (dootabase.get(String('server-id')).length != 18 || dootabase.get(String('category-id')).length != 18 || dootabase.get(String('support-role-id')).length != 18) {
+  } else if (dootabase.get(String('server-id')).length != 18 || dootabase.get(String('support-role-id')).length != 18) {
     console.log(('I Shutdown Bot Because Something On Config Wrong' + '\n' +
     'You Can Fix Config In "config.json" File' + '\n' +
     'Made By Parham™️'));
     return
   }
   server_id = dootabase.get(String('server-id'));
-  category_id = dootabase.get(String('category-id'));
   support_role_id = dootabase.get(String('support-role-id'));
   token = dootabase.get(String('token')) == 'env' ? (process.env.Token) : dootabase.get(String('token'));
   console.log(('Everything Seems Be Good!' + '\n' +
@@ -108,8 +107,8 @@ fire:null,
 
 
 s4d.client.on('ready', async () => {
-  if (!(typeof (s4d.client.guilds.cache.get(dootabase.get(String('server-id')))).channels.cache.get((category) => category.id === dootabase.get(String('category-id'))) !== undefined) || !(typeof ((s4d.client.guilds.cache.get(dootabase.get(String('server-id')))).roles.cache.get(dootabase.get(String('support-role-id')))) !== undefined)) {
-    console.log(('I Shutdown Bot Because Category ID Or Role ID Is Wrong' + '\n' +
+  if (!(typeof (server_id.roles.cache.get(support_role_id)) !== undefined)) {
+    console.log(('I Shutdown Bot Because Role ID Is Wrong' + '\n' +
     'You Can Fix The ID In The "config.json" File' + '\n' +
     'Made By Parham™️'));
     s4d.client.destroy();
@@ -159,9 +158,9 @@ s4d.client.on('messageCreate', async (s4dmessage) => {
         embed.setTitle('Ticket')
          .setURL(null);
         embed.setDescription('To Make A Ticket Click `Ticket` Button');
-        embed.setFooter('Ticket System',null);
+        embed.setFooter('Parham#0001',null);
         s4dmessage.channel.send({
-                content: String('**Ticket System**'),
+                content: String('**Ticket**!'),
                 components: [new MessageActionRow().addComponents(ticket)],
                 embeds: [embed]
                 });
@@ -193,7 +192,7 @@ let interaction = i; if (!(i.isButton())) return;
           dootabase.set(String('cooldown'), ((Math.floor(new Date().getTime()/1000)) + 2));
           ticket_channels_count = 0;
           ((i.guild)).channels.cache.forEach(c =>{
-             if (!(((c).type) == 'GUILD_CATEGORY') && ((c).parentId) == category_id) {
+             if (!(((c).type) == 'GUILD_CATEGORY') && ((c).parentId) == (((i.channel)).parentId)) {
               ticket_channels_count = (typeof ticket_channels_count === 'number' ? ticket_channels_count : 0) + 1;
             }
 
@@ -212,7 +211,7 @@ let interaction = i; if (!(i.isButton())) return;
               dootabase.set(String('current'), 1);
             }
             ticket_channels_count = null;
-            ((i.guild)).channels.create(('ticket-' + String(dootabase.get(String('current')))), { type: 'text', parent: category_id });
+            ((i.guild)).channels.create(('ticket-' + String(dootabase.get(String('current')))), { type: 'text', parent: (((i.channel)).parentId) });
             await delay(Number(2)*1000);
             created_ticket_channel = s4d.client.channels.cache.find((channel) => channel.name === ('ticket-' + String(dootabase.get(String('current')))));
             if (typeof ((i.member.user)) !== undefined) {
@@ -232,7 +231,7 @@ let interaction = i; if (!(i.isButton())) return;
               embed.setTitle('Close Ticket')
                .setURL(null);
               embed.setDescription('To Close Ticket Click `Close Ticket` Button');
-              embed.setFooter('Ticket System',null);
+              embed.setFooter('Parham#0001',null);
               let closeticket = new MessageButton()
                 closeticket.setStyle("DANGER");closeticket.setLabel('Close Ticket');closeticket.setEmoji('🔐');closeticket.setCustomId('closeticket');closeticket.setDisabled(false);created_ticket_channel.send({
                       content: String('If Your Ticket Usage Done Please Close Ticket.'),
@@ -264,7 +263,7 @@ let interaction = i; if (!(i.isButton())) return;
            .setURL(null);
           embed.setDescription(('To Delete Ticket Click The `Delete Ticket` Button' + '\n' +
           'To Reopen Ticket Click The `Reopen Ticket` Button'));
-          embed.setFooter('Ticket System',null);
+          embed.setFooter('Parham#0001',null);
           let deleteticket = new MessageButton()
             deleteticket.setStyle("DANGER");deleteticket.setLabel('Delete Ticket');deleteticket.setEmoji('🔒');deleteticket.setCustomId('deleteticket');deleteticket.setDisabled(false);let reopenticket = new MessageButton()
             reopenticket.setStyle("SUCCESS");reopenticket.setLabel('Reopen Ticket');reopenticket.setEmoji('🔓');reopenticket.setCustomId('reopenticket');reopenticket.setDisabled(false);i.reply({
@@ -293,7 +292,7 @@ let interaction = i; if (!(i.isButton())) return;
           embed.setTitle('Ticket Deleting...')
            .setURL(null);
           embed.setDescription('Ticket Is Being Deleted!');
-          embed.setFooter('Ticket System',null);
+          embed.setFooter('Parham#0001',null);
           i.reply({
                   content: String('**Warning!** ⚠️ Ticket Deleted By ' + String((i.member.user))),
                   ephemeral: false,
@@ -322,7 +321,7 @@ let interaction = i; if (!(i.isButton())) return;
            .setURL(null);
           embed.setDescription(('Ticket Reopened!' + '\n' +
           'The Ticket Creator Can Open Another Ticket Or Have Already Another Ticket Because Reopen Does Not Affect Already Tickets & If Ticket Creator Leave & Rejoin Server Reopen Tickets Does Not Support Ticket Back Feature'));
-          embed.setFooter('Ticket System',null);
+          embed.setFooter('Parham#0001',null);
           i.reply({
                   content: String('Ticket Reopened! By ' + String((i.member.user))),
                   ephemeral: false,
