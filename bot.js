@@ -76,12 +76,11 @@ fire:null,
 
   });
   dootabase.setFile("./"+ 'config'+".json");
-  if (!dootabase.has(String('token')) || !dootabase.has(String('status')) || !dootabase.has(String('server-id')) || !dootabase.has(String('category-id')) || !dootabase.has(String('support-role-id'))) {
+  if (!dootabase.has(String('token')) || !dootabase.has(String('status')) || !dootabase.has(String('server-id')) || !dootabase.has(String('support-role-id'))) {
     dootabase.clear()
     dootabase.set(String('token'), 'Config Me!');
     dootabase.set(String('status'), 'Config Me!');
     dootabase.set(String('server-id'), 'Config Me!');
-    dootabase.set(String('category-id'), 'Config Me!');
     dootabase.set(String('support-role-id'), 'Config Me!');
     console.log(('I Shutdown Bot Because The Config File Does Not Exist Or Something On Config File Isn\'t Exist' + '\n' +
     'So I Create Config File Or Fix Config File' + '\n' +
