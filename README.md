@@ -1,3 +1,5 @@
+# I'm No Longer Supporting This Repo
+
 # Ticket System
 A Ticket System Discord Bot Source Setup!
 Made By Myself (Parham)
